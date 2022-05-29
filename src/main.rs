@@ -1,14 +1,57 @@
+use std::cmp::Ord;
+use std::cmp::Ordering;
 fn main() {
-    vectorexp();
+    // vectorexp();
     // tupleexp();
     // define_array();
     // basic_define_vars();
+    let act: Activity = Activity::Sleeping(5);
+    println!("{}", enumexp(act).to_string());
+
+    generics_exp();
 }
 
+fn generics_exp() {
+    let c1 = Container { item: 10 };
+    let c2 = Container {
+        item: "Hello".to_string(),
+    };
+    println!("{}", c1.item);
+    println!("{}", c2.item);
+    println!("{:?}", c1.compare_item(&1));
+    println!("{:?}", c2.compare_item(&"Hello".to_string()));
+    println!("{:?}", compare(&10, &120));
+}
+
+struct Container<T> {
+    item: T,
+}
+impl<T: Ord> Container<T> {
+    fn compare_item(&self, other: &T) -> Ordering {
+        self.item.cmp(other)
+    }
+}
+fn compare<T: Ord>(item: &T, item2: &T) -> Ordering {
+    item.cmp(item2)
+}
 fn tupleexp() {
     let t = Bar(234, true, Foo { x: 9 });
     // let t2 = (23, false, Foo { x: 23 });
     println!("{} ,{},{}", t.0, t.1, t.2.x);
+}
+enum Activity {
+    Sleeping(u8),
+    skiing,
+    Coding(String),
+}
+fn enumexp(act: Activity) -> String {
+    let data = match act {
+        Activity::Coding(lang) => format!("Codding {}", lang),
+        Activity::Sleeping(hrs) if hrs > 8 => format!("wake up"),
+        Activity::Sleeping(hr) => format!("let hime sleep for {}", (8 - hr)),
+        Activity::skiing => format!("skinng"),
+    };
+    return data;
 }
 fn vectorexp() {
     let mut arr: Vec<u8> = Vec::new();
