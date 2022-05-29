@@ -1,3 +1,4 @@
+#![allow(unused)]
 use std::cmp::Ord;
 use std::cmp::Ordering;
 fn main() {
@@ -9,6 +10,24 @@ fn main() {
     println!("{}", enumexp(act).to_string());
 
     generics_exp();
+
+    let f: Option<Foo> = Some(Foo { x: 9 });
+    if f.is_some() {
+        println!("not NOne")
+    }
+    println!("foo: {:?}", f);
+    // print!("{:?}", exeptionexp(10.0, 4.0));
+    match exeptionexp(10., 2.) {
+        Ok(r) => println!("result {}", r),
+        Err(s) => println!("error {}", s),
+    }
+}
+fn exeptionexp(num: f32, by: f32) -> Result<i32, String> {
+    if by == 0. {
+        Err("cannot divede by zero".to_string())
+    } else {
+        Ok((num / by).floor() as i32)
+    }
 }
 
 fn generics_exp() {
@@ -41,7 +60,7 @@ fn tupleexp() {
 }
 enum Activity {
     Sleeping(u8),
-    skiing,
+    Skiing,
     Coding(String),
 }
 fn enumexp(act: Activity) -> String {
@@ -49,7 +68,7 @@ fn enumexp(act: Activity) -> String {
         Activity::Coding(lang) => format!("Codding {}", lang),
         Activity::Sleeping(hrs) if hrs > 8 => format!("wake up"),
         Activity::Sleeping(hr) => format!("let hime sleep for {}", (8 - hr)),
-        Activity::skiing => format!("skinng"),
+        Activity::Skiing => format!("skinng"),
     };
     return data;
 }
