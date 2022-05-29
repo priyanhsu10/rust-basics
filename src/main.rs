@@ -1,4 +1,9 @@
 #![allow(unused)]
+mod arrayexp;
+mod owenship;
+mod threadexp;
+
+use arrayexp::define_array;
 use std::cmp::Ord;
 use std::cmp::Ordering;
 fn main() {
@@ -6,21 +11,23 @@ fn main() {
     // tupleexp();
     // define_array();
     // basic_define_vars();
-    let act: Activity = Activity::Sleeping(5);
-    println!("{}", enumexp(act).to_string());
+    // let act: Activity = Activity::Sleeping(5);
+    // println!("{}", enumexp(act).to_string());
 
-    generics_exp();
+    // generics_exp();
 
-    let f: Option<Foo> = Some(Foo { x: 9 });
-    if f.is_some() {
-        println!("not NOne")
-    }
-    println!("foo: {:?}", f);
-    // print!("{:?}", exeptionexp(10.0, 4.0));
-    match exeptionexp(10., 2.) {
-        Ok(r) => println!("result {}", r),
-        Err(s) => println!("error {}", s),
-    }
+    // let f: Option<Foo> = Some(Foo { x: 9 });
+    // if f.is_some() {
+    //     println!("not NOne")
+    // }
+    // println!("foo: {:?}", f);
+    // // print!("{:?}", exeptionexp(10.0, 4.0));
+    // match exeptionexp(10., 2.) {
+    //     Ok(r) => println!("result {}", r),
+    //     Err(s) => println!("error {}", s),
+    // }
+    // owenship::exp();
+    threadexp::exp();
 }
 fn exeptionexp(num: f32, by: f32) -> Result<i32, String> {
     if by == 0. {
@@ -83,18 +90,6 @@ fn vectorexp() {
     print!("item:{}", ar2.get(0).unwrap().x);
 }
 struct Bar(u8, bool, Foo);
-pub fn define_array() {
-    // let arr1: [u8; 5] = [1, 2, 23, 4, 1];
-    let arr1: [u8; 5] = [0; 5];
-    for x in arr1 {
-        println!("{}", x);
-    }
-    let ar2: [Foo; 4] = [Foo { x: 8 }; 4];
-    for x in ar2 {
-        println!("{}", x.x)
-    }
-}
-
 #[derive(Clone, Copy, Debug)]
 struct Foo {
     x: u8,
