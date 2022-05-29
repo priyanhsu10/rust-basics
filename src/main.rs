@@ -1,5 +1,6 @@
 #![allow(unused)]
 mod arrayexp;
+mod chaptor_2;
 mod owenship;
 mod threadexp;
 
@@ -27,7 +28,8 @@ fn main() {
     //     Err(s) => println!("error {}", s),
     // }
     // owenship::exp();
-    threadexp::exp();
+    // threadexp::exp();
+    chaptor_2::guessing_game();
 }
 fn exeptionexp(num: f32, by: f32) -> Result<i32, String> {
     if by == 0. {
