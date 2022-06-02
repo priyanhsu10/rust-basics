@@ -1,17 +1,9 @@
 pub fn exp() {
-    // variableshadow();
-    // tupleexp();
-    // print_array();
-    fib(10);
-    println!("{}", fib(10));
+    variableshadow();
+    tupleexp();
+    print_array();
 }
 
-pub fn fib(n: u32) -> u32 {
-    if n <= 2 {
-        return 1;
-    }
-    return fib(n - 1) + fib(n - 2);
-}
 pub fn variableshadow() {
     let x = 10;
     println!("value of x :{}", x);
