@@ -1,7 +1,13 @@
 use std::{collections::HashMap, hash::Hash, mem};
 pub fn exp() {
     // fib_exp();
-    grid_traversar_exp();
+    // grid_traversar_exp();
+    can_sum_exp();
+}
+
+fn can_sum_exp() {
+    let a = [1, 2, 3, 4, 5, 7];
+    println!("{}", can_sum(7, &a))
 }
 fn grid_traversar_exp() {
     // let mut r = grid_traverser(2, 3);
@@ -20,6 +26,15 @@ fn grid_traversar_exp() {
     println!("{}", r);
 }
 
+fn can_sum(target: u16, nums: &[u16]) -> bool {
+    for x in nums {
+        if target - x == 0 {
+            return true;
+        }
+    }
+
+    false
+}
 fn grid_traverser(m: u8, n: u8) -> u64 {
     if m == 1 && n == 1 {
         return 1;
