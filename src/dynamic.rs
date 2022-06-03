@@ -7,7 +7,17 @@ pub fn exp() {
 
 fn can_sum_exp() {
     let a = [1, 2, 3, 4, 5, 7];
-    println!("{}", can_sum(7, &a))
+    println!("sum=7 ==>{}", can_sum(7, &a, 0));
+    // let a = [5, 3, 4, 7];
+    // println!("sum=7 ==> {}", can_sum(7, &a));
+    // let a = [2, 4];
+    // println!("sum=7 ==>{}", can_sum(7, &a));
+    // let a = [2, 3, 5];
+    // println!("sum=8 ==>{}", can_sum(8, &a));
+    // let mut memo: HashMap<i32, bool> = HashMap::new();
+    // let a = [7, 14];
+    // println!("sum=800 ==>{}", can_sum_memo(150, &a, &mut memo, 0));
+    // println!("sum=800 ==>{}", can_sum(150, &a, 0));
 }
 fn grid_traversar_exp() {
     // let mut r = grid_traverser(2, 3);
@@ -26,15 +36,64 @@ fn grid_traversar_exp() {
     println!("{}", r);
 }
 
-fn can_sum(target: u16, nums: &[u16]) -> bool {
-    for x in nums {
-        if target - x == 0 {
+// fn can_sum(target: u16, nums: &[u16]) -> bool {
+//     for x in nums {
+//         if target - x == 0 {
+//             return true;
+//         }
+//     }
+
+//     false
+// }
+
+fn can_sum(target: i32, nums: &[i32], level: i16) -> bool {
+    if target == 0 {
+        return true;
+    }
+    if target < 0 {
+        return false;
+    }
+    let nextlevel = level + 1;
+    for n in nums {
+        let r = target - n;
+        for i in 0..level {
+            print!("- ");
+        }
+        println!("> {}", r);
+        if can_sum(r, &nums, nextlevel) == true {
             return true;
         }
     }
-
     false
 }
+
+fn can_sum_memo(target: i32, nums: &[i32], memo: &mut HashMap<i32, bool>, level: i16) -> bool {
+    for i in 0..level {
+        print!("- ");
+    }
+    println!(" > {}", target);
+    if target == 0 {
+        return true;
+    }
+    if target < 0 {
+        return false;
+    }
+    if memo.contains_key(&target) {
+        return memo[&target];
+    }
+    let nextlevel = level + 1;
+    for n in nums {
+        let r = target - n;
+
+        if can_sum_memo(r, &nums, memo, nextlevel) == true {
+            memo.insert(target, true);
+            return true;
+        }
+    }
+    memo.insert(target, false);
+    false
+}
+
 fn grid_traverser(m: u8, n: u8) -> u64 {
     if m == 1 && n == 1 {
         return 1;
