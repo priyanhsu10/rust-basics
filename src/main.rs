@@ -4,6 +4,7 @@ mod chaper_3;
 mod chaptor_2;
 mod dynamic;
 mod owenship;
+mod smart_poiters;
 mod threadexp;
 
 use arrayexp::define_array;
@@ -33,7 +34,8 @@ fn main() {
     // threadexp::exp();
     // chaptor_2::guessing_game();
     // chaper_3::exp();
-    dynamic::exp();
+    // dynamic::exp();
+    smart_poiters::exp();
 }
 fn exeptionexp(num: f32, by: f32) -> Result<i32, String> {
     if by == 0. {
